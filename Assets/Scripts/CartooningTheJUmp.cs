@@ -14,6 +14,19 @@ public class CartooningTheJUmp : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    [SerializeField] AudioClip jumpsfx = null;
+    AudioSource audiosource = null;
+
+    void PlayFeedback()
+    {
+        if (audiosource != null && jumpsfx != null)
+        {
+            audiosource.clip = jumpsfx;
+            audiosource.Play();
+            Debug.Log("audio is working");
+        }
+    }
+
     void Update()
     {
         if (rb.velocity.y < 0)

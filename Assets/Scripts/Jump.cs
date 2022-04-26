@@ -10,6 +10,24 @@ public class Jump : MonoBehaviour
     public Collider2D GroundCheckCollider;
     public bool _isGrounded;
 
+
+    [SerializeField] AudioClip jumpsfx = null;
+    AudioSource audiosource = null;
+    void Start()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
+
+        void PlayFeedback()
+    {
+        if (audiosource != null && jumpsfx != null)
+        {
+            audiosource.clip = jumpsfx;
+            audiosource.Play();
+            Debug.Log("audio is working");
+        }
+    }
+
     public bool IsGrounded
     {
         get
@@ -31,6 +49,8 @@ public class Jump : MonoBehaviour
             if (Input.GetButtonDown("Jump") && IsGrounded )
             {
                 GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+                  PlayFeedback();
+
             }
         
     }
